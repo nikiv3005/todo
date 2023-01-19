@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Nicole To Do list</title>
+  <link rel="stylesheet" type="text/css" href="resources/css/style1.css">
+    <script src="script1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
+    <script id="todo-list-template" type="text/x-handlebars-template">
+      {{#each this}}
+      <li id="todo-item-{{@index}}" class="todo-item {{#if done}}done{{/if}}">
+        <span class="name">{{name}}</span>
+        <input value="{{#if done}}Reopen{{else}}Close{{/if}}" id="done-item-{{@index}}" type="button">
+        <!-- <div class="description hidden">{{description}}</div> -->
+      </li>
+      {{/each}}
+    </script>
+</head>
+
+<body onload="todocontroller.init()">
+  <header>
+    <div class="image-container logo">
+      <img src="resources/Logo.jpeg">
+    </div>
+    <hr/>
+  </header>
+  <div id="box">
+    <h1>My To Do List</h1>
+
+    <form>
+        Item: <input type="text" id="todo-name"><br> 
+        <!-- Description: <br>
+        <textarea id="todo-description"></textarea><br> -->
+
+        <input type="button" id="add-button" value="Add"></input>
+
+    </form>
+
+    <ul id="todos">
+    </ul>
+    
+  </div>
+    <footer>
+      <p>&copy;
+          Nicole <script type="text/javascript">
+            document.write(new Date().getFullYear());
+          </script>
+        </p>
+  
+    </footer>
+
+</body>
+
+</html>

@@ -21,6 +21,14 @@ hr {
     top: 250px;
   }
 
+  form {
+    display: flex;
+    flex-direction: row;
+position: relative;
+justify-content: center;
+border-radius: 10px;
+  }
+
 #todos {
     list-style-type: none;
 }
@@ -47,6 +55,27 @@ hr {
 
 .hidden {
     display: none;
+}
+
+#todo-name {
+  width: 50%;
+  position: relative;
+  border-radius: 5px;
+}
+
+#add-button {
+  /* position: relative;
+  float: right; */
+  font-weight: 500;
+  font-size: 16px;
+  background-color: orange;
+  border: none;
+  color: white;
+  cursor: pointer;
+  outline: none;
+  width: 20%;
+  height: 45px;
+  border-radius: 5px;
 }
 
 footer {

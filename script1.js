@@ -1,11 +1,11 @@
 class TodoController {
   constructor() {
       this.todos = [{
-              name: 'lunch',
+              name: 'example1',
             //   description: '13.00h, A Palleira Restaurant'
           },
           {
-              name: 'dojo',
+              name: 'example2',
             //   description: '17.00h. Create a todo list!'
           },
 

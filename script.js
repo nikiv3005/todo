@@ -1,56 +1,60 @@
-$(document).ready(function () {
+class TodoController {
+  constructor() {
+      this.todos = [{
+              name: 'example1',
+          },
+          {
+              name: 'example2',
+          },
 
-	$('#list-items').html(localStorage.getItem('listItems'));
-	  
-	$('.add-items').submit(function(event) 
-	{
-	  event.preventDefault();
-  
-	  var item = $('#todo-list-item').val();
-  
-	  if(item) 
-	  {
-		$('#list-items').append("<li><input class='checkbox' type='checkbox'/>" + item + "<a class='remove'>x</a></li>");
-		
-		localStorage.setItem('listItems', $('#list-items').html());
-		
-		$('#todo-list-item').val("");
-	  }
-	  
-	});
-  
-	$(document).on('change', '.checkbox', function() 
-	{
-	  if($(this).attr('checked')) 
-	  {
-		$(this).removeAttr('checked');
-	  } 
-	  else 
-	  {
-		$(this).attr('checked', 'checked');
-	  }
-  
-	  $(this).parent().toggleClass('completed');
-	  
-	  localStorage.setItem('listItems', $('#list-items').html());
-	});
-  
-	$(document).on('click', '.remove', function() 
-	{
-	  $(this).parent().remove();
-	  
-	  localStorage.setItem('listItems', $('#list-items').html());
-	});
-  
-  });
+      ];
+  }
+  init() {
+      this.updateTodos();
+      this.createAddButtonListener();
+  }
 
+  updateTodos() { // <---- full render!!
+    var render = Handlebars.compile(document.getElementById('todo-list-template').innerHTML);
+    var html = render(this.todos);
+    document.getElementById('todos').innerHTML = html; // <--- DOM Destroyed
+    
+    this.createTodoListeners();
+  }
 
-  (function(){
-	var scriptHTML = document.getElementById('template').innerHTML;
-	var template = Handlebars.compile(scriptHTML);
-	var data = {title: 'My To Do List'};
-	var compiledData = template(data);
+  toggleDoneItem(todo) {
+      return () => {
+          console.log('closing item');
+          todo.done = !todo.done;
+          this.updateTodos(); // <---- force re-render
+      }
+  }
 
-	document.getElementById('box').innerHTML = compiledData;
-  }());
-  
+  createAddButtonListener() {
+      document.getElementById('add-button').addEventListener('click', () => {
+          var newTodoName = document.getElementById('todo-name').value;
+          this.todos.push({
+              name: newTodoName,
+          });
+          this.updateTodos(); // <--- force re-render
+      });
+  }
+
+  createTodoListeners() {
+      this.todos.forEach((todo, index) => {
+          document.getElementById('done-item-' + index).addEventListener(
+            'click', this.toggleDoneItem(todo));
+          
+          document.getElementById('todo-item-' + index)
+            .getElementsByClassName('name')[0].addEventListener(
+            'click', (event) => {
+
+            //   event.target.parentNode.getElementsByClassName('description')[0]
+            //     .classList.toggle('hidden');
+
+          })
+      });
+  }
+
+}
+var todocontroller = new TodoController();

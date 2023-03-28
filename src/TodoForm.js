@@ -1,7 +1,6 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
 import useInputState from "./useInputState";
-import Button from "@material-ui/core/Button";
+import "./styles.css";
 
 const TodoForm = ({ saveTodo }) => {
   const { value, reset, onChange } = useInputState();
@@ -15,15 +14,16 @@ const TodoForm = ({ saveTodo }) => {
         reset();
       }}
     >
-      <TextField
-        variant="outlined"
+      <input
+        type="text"
+        className="inputText"
         placeholder="Add todo"
         onChange={onChange}
         value={value}
       />
-      <Button type="submit" variant="contained">
+      <button type="submit" className="submitButton">
         Submit
-      </Button>
+      </button>
     </form>
   );
 };

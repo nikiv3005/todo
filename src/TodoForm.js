@@ -1,8 +1,7 @@
 import React from "react";
 import useInputState from "./useInputState";
-import "./styles.css";
 
-const TodoForm = ({ saveTodo }) => {
+const TodoForm = ({ onSaveTodo }) => {
   const { value, reset, onChange } = useInputState();
 
   return (
@@ -10,7 +9,7 @@ const TodoForm = ({ saveTodo }) => {
       onSubmit={(event) => {
         event.preventDefault();
 
-        saveTodo(value);
+        onSaveTodo(value);
         reset();
       }}
     >

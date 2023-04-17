@@ -1,7 +1,11 @@
+
 .App {
   font-family: sans-serif;
-  text-align: center;
+
 }
+h2 {
+  text-align: center;
+}   
 
 footer {
   position: absolute;
@@ -32,4 +36,24 @@ form {
   width: 50%;
   padding: 12px;
   font-size: 15px;
+}
+
+.checkbox:checked + span {
+text-decoration: line-through;
+background-color: lightgrey;
+}
+
+ul {
+  list-style: none;
+display: flex;
+  flex-direction: column;
+  left: 20%;
+position: relative;
+  width: 50%;
+
+}
+
+.Close {
+  float: right;
+
 }

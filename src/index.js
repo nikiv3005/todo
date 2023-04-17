@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Typography from "@material-ui/core/Typography";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import useTodoState from "./useTodoState";
 import "./styles.css";
-import logo from "./Logo.jpeg";
+import logo from "./assets/Logo.jpeg";
 import Footer from "./Footer";
 
 const App = () => {
@@ -14,12 +13,10 @@ const App = () => {
   return (
     <div className="App">
       <img alt="Logo" src={logo} />
-      <Typography component="h1" variant="h2">
-        Nicole To Do List
-      </Typography>
+      <h2>Nicole To Do List</h2>
 
       <TodoForm
-        saveTodo={(todoText) => {
+        onSaveTodo={(todoText) => {
           const trimmedText = todoText.trim();
 
           if (trimmedText.length > 0) {

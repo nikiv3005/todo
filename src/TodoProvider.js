@@ -7,12 +7,12 @@ export const useTodo = () => useContext(TodoContext);
 export default function TodoProvider({ children }) {
   const [todos, setTodo] = useState([]);
 
-  const addTodo = (todo) =>
+  const addTodo = (description) =>
     setTodo([
       ...todos,
       {
         id: v4(),
-        todo,
+        description,
         complete: false,
       },
     ]);

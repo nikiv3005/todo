@@ -11,11 +11,7 @@ export default function Todo({ id, description, complete }) {
   return (
     <tr>
       <td>
-        <input
-          type="checkbox"
-          onChange={checkTodo}
-          checked={description.complete}
-        />
+        <input type="checkbox" onChange={checkTodo} checked={complete} />
       </td>
       <td>
         <span className={complete ? "todo-done" : ""}>{description}</span>

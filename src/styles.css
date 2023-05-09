@@ -1,0 +1,69 @@
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.app {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+}   
+
+.todo-done {
+  text-decoration: line-through;
+}
+
+form {
+  width: 100%;
+  display: flex;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+}
+
+button {
+  background-color: orange;
+  padding: 0 20px;
+  border-radius: 0 5px 5px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+  td:first-child {
+    table-layout: fixed;
+    width: 20px;
+  }
+
+  td:nth-child(2) {
+    padding: 10px 20px;
+    font-size: 14pt;
+  }
+
+.close {
+  background-color: none;
+}
+
+  footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 10rem;
+  text-align: center;
+  font-size: 1.125rem;
+  line-height: 1.4;
+  background-color: orange;
+  color: white;
+}

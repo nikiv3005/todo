@@ -48,8 +48,8 @@ app.put("/todo/:id", (request, response) => {
 
 app.delete("/todo/:id", (request, response) => {
   var id = parseInt(request.params.id);
-  if (todos.filter((todo) => todo.id == id).length !== 0) {
-    todos = todos.filter((todo) => todo.id !== id);
+  if (todos.some((todo) => todo.id === id).length !== 0) {
+    todos = todos.some((todo) => todo.id !== id);
     response.status(200).send({ message: "succesfully deleted todo " + id });
   } else {
     response.status(404).send({ error: "Todo not found" });

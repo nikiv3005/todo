@@ -42,14 +42,14 @@ app.put("/todo/:id", (request, response) => {
     return response.status(404).json({ error: "Todo not found" });
   }
   updatedTodo.description = request.body.description || updatedTodo.description;
-  updatedTodo.completed = request.body.completed || updatedTodo.completed;
+  updatedTodo.completed = request.body.completed ?? updatedTodo.completed;
   response.json(updatedTodo);
 });
 
 app.delete("/todo/:id", (request, response) => {
   var id = parseInt(request.params.id);
   if (todos.some((todo) => todo.id === id).length !== 0) {
-    todos = todos.some((todo) => todo.id !== id);
+    todos = todos.filter((todo) => todo.id !== id);
     response.status(200).send({ message: "succesfully deleted todo " + id });
   } else {
     response.status(404).send({ error: "Todo not found" });

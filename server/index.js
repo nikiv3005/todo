@@ -31,8 +31,8 @@ app.post("/todo", (request, response) => {
     description: request.body.description,
     completed: request.body.completed,
   };
-  todos.push(newTodo);
-  response.status(201).json(newTodo);
+  const newTodos = [...todos, newTodo];
+  response.status(201).json(newTodos);
 });
 
 app.put("/todo/:id", (request, response) => {

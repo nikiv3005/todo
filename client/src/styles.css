@@ -42,14 +42,8 @@ table {
   border-collapse: collapse;
 }
 
-  td:first-child {
-    table-layout: fixed;
-    width: 20px;
-  }
-
-  td:nth-child(2) {
-    padding: 10px 20px;
-    font-size: 14pt;
+ .description {
+    width: 500px;
   }
 
 .close {

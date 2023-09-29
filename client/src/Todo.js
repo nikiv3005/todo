@@ -7,19 +7,22 @@ import SaveIcon from "@material-ui/icons/Save";
 import "./styles.css";
 
 export default function Todo({ id, description, completed }) {
-  const { setStatusTodo, deleteSingleTodo, updateTodoDescription } = useTodo();
+  const { deleteSingleTodo, updateTodoDescription, updateTodoStatus } =
+    useTodo();
 
-  const checkTodo = (e) => setStatusTodo(id, e.target.checked);
+  const checkTodo = (e) => updateTodoStatus(id, e.target.checked);
 
   const [editTodoId, setEditTodoId] = useState(null);
   const [editedTodoDescription, setEditedTodoDescription] = useState("");
+
+  const isEditMode = editTodoId === id;
 
   const handleEdit = (id, currentDescription) => {
     setEditTodoId(id);
     setEditedTodoDescription(currentDescription);
   };
 
-  const handleSave = (id) => {
+  const handleSave = () => {
     updateTodoDescription(id, editedTodoDescription);
     setEditTodoId(null);
     setEditedTodoDescription("");
@@ -35,14 +38,14 @@ export default function Todo({ id, description, completed }) {
         <input type="checkbox" onChange={checkTodo} checked={completed} />
       </td>
       <td key={id}>
-        {editTodoId === id ? (
+        {isEditMode ? (
           <>
             <input
               type="text"
               value={editedTodoDescription}
               onChange={(e) => setEditedTodoDescription(e.target.value)}
             />
-            <IconButton onClick={() => handleSave(id)}>
+            <IconButton onClick={() => handleSave()}>
               <SaveIcon />
             </IconButton>
           </>

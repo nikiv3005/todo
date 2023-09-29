@@ -1,11 +1,11 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import {
-  fetchTodo,
+  fetchTodoList,
   createTodo,
   deleteTodo,
   updateTodoDescriptionAPI,
+  updateTodoStatusAPI,
 } from "./services/fetch";
-// import { v4 } from "uuid";
 
 const TodoContext = createContext();
 
@@ -15,24 +15,16 @@ export default function TodoProvider({ children }) {
   const [todos, setTodo] = useState([]);
 
   useEffect(() => {
-    const fetchTodoAsync = async () => {
-      const fetchedTodo = await fetchTodo();
+    const fetchTodoListAsync = async () => {
+      const fetchedTodo = await fetchTodoList();
       setTodo(fetchedTodo);
     };
-    fetchTodoAsync();
+    fetchTodoListAsync();
   }, []);
 
   const addTodo = async (todo) => {
-    const todos = await createTodo(todo);
-    setTodo((prevTodos) => [...prevTodos, todos]);
-    // setTodo([
-    //   ...todos,
-    //   {
-    //     id: v4(),
-    //     description,
-    //     completed: false,
-    //   },
-    // ]);
+    const createdTodo = await createTodo(todo);
+    setTodo((prevTodos) => [...prevTodos, createdTodo]);
   };
 
   const updateTodoDescription = async (id, description) => {
@@ -51,8 +43,13 @@ export default function TodoProvider({ children }) {
     setTodo((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   };
 
-  const setStatusTodo = (id, status) => {
-    setTodo(todos.map((t) => (t.id === id ? { ...t, completed: status } : t)));
+  const updateTodoStatus = async (id, completed) => {
+    const updatedTodo = await updateTodoStatusAPI(id, completed);
+    setTodo(
+      todos.map((t) =>
+        t.id === id ? { ...t, completed: updatedTodo.completed } : t
+      )
+    );
   };
 
   return (
@@ -62,7 +59,7 @@ export default function TodoProvider({ children }) {
         addTodo,
         deleteSingleTodo,
         updateTodoDescription,
-        setStatusTodo,
+        updateTodoStatus,
       }}
     >
       {children}

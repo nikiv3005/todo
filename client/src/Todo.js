@@ -12,20 +12,18 @@ export default function Todo({ id, description, completed }) {
 
   const checkTodo = (e) => updateTodoStatus(id, e.target.checked);
 
-  const [editTodoId, setEditTodoId] = useState(null);
+  const [isEditMode, setEditMode] = useState(false);
   const [editedTodoDescription, setEditedTodoDescription] = useState("");
 
-  const isEditMode = editTodoId === id;
-
   const handleEdit = (id, currentDescription) => {
-    setEditTodoId(id);
+    setEditMode(id);
     setEditedTodoDescription(currentDescription);
   };
 
-  const handleSave = () => {
+  const saveEdit = () => {
     updateTodoDescription(id, editedTodoDescription);
-    setEditTodoId(null);
     setEditedTodoDescription("");
+    setEditMode(false);
   };
 
   const handleDelete = (id) => {
@@ -45,7 +43,7 @@ export default function Todo({ id, description, completed }) {
               value={editedTodoDescription}
               onChange={(e) => setEditedTodoDescription(e.target.value)}
             />
-            <IconButton onClick={() => handleSave()}>
+            <IconButton onClick={() => saveEdit()}>
               <SaveIcon />
             </IconButton>
           </>

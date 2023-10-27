@@ -15,8 +15,8 @@ export default function Todo({ id, description, completed }) {
   const [isEditMode, setEditMode] = useState(false);
   const [editedTodoDescription, setEditedTodoDescription] = useState("");
 
-  const handleEdit = (id, currentDescription) => {
-    setEditMode(id);
+  const handleEdit = (currentDescription) => {
+    setEditMode(true);
     setEditedTodoDescription(currentDescription);
   };
 
@@ -26,7 +26,7 @@ export default function Todo({ id, description, completed }) {
     setEditMode(false);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = () => {
     deleteSingleTodo(id);
   };
 
@@ -57,12 +57,12 @@ export default function Todo({ id, description, completed }) {
             {!completed && (
               <>
                 <td>
-                  <IconButton onClick={() => handleEdit(id, description)}>
+                  <IconButton onClick={() => handleEdit(description)}>
                     <EditIcon />
                   </IconButton>
                 </td>
                 <td>
-                  <IconButton onClick={() => handleDelete(id)}>
+                  <IconButton onClick={() => handleDelete()}>
                     <DeleteIcon />
                   </IconButton>
                 </td>

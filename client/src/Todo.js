@@ -1,25 +1,75 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTodo } from "./TodoProvider";
 import IconButton from "@material-ui/core/IconButton";
+import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import SaveIcon from "@material-ui/icons/Save";
+import "./styles.css";
 
-export default function Todo({ id, description, complete }) {
-  const { setStatusTodo, deleteTodo } = useTodo();
+export default function Todo({ id, description, completed }) {
+  const { deleteSingleTodo, updateTodoDescription, updateTodoStatus } =
+    useTodo();
 
-  const checkTodo = (e) => setStatusTodo(id, e.target.checked);
+  const checkTodo = (e) => updateTodoStatus(id, e.target.checked);
+
+  const [isEditMode, setEditMode] = useState(false);
+  const [editedTodoDescription, setEditedTodoDescription] = useState("");
+
+  const handleEdit = (currentDescription) => {
+    setEditMode(true);
+    setEditedTodoDescription(currentDescription);
+  };
+
+  const saveEdit = () => {
+    updateTodoDescription(id, editedTodoDescription);
+    setEditedTodoDescription("");
+    setEditMode(false);
+  };
+
+  const handleDelete = () => {
+    deleteSingleTodo(id);
+  };
 
   return (
     <tr>
       <td>
-        <input type="checkbox" onChange={checkTodo} checked={complete} />
+        <input type="checkbox" onChange={checkTodo} checked={completed} />
       </td>
-      <td>
-        <span className={complete ? "todo-done" : ""}>{description}</span>
-      </td>
-      <td>
-        <IconButton className="close" onClick={() => deleteTodo(id)}>
-          <DeleteIcon />
-        </IconButton>
+      <td key={id}>
+        {isEditMode ? (
+          <>
+            <input
+              type="text"
+              value={editedTodoDescription}
+              onChange={(e) => setEditedTodoDescription(e.target.value)}
+            />
+            <IconButton onClick={() => saveEdit()}>
+              <SaveIcon />
+            </IconButton>
+          </>
+        ) : (
+          <>
+            <td className="description">
+              <span className={completed ? "todo-done" : ""}>
+                {description}
+              </span>
+            </td>
+            {!completed && (
+              <>
+                <td>
+                  <IconButton onClick={() => handleEdit(description)}>
+                    <EditIcon />
+                  </IconButton>
+                </td>
+                <td>
+                  <IconButton onClick={() => handleDelete()}>
+                    <DeleteIcon />
+                  </IconButton>
+                </td>
+              </>
+            )}
+          </>
+        )}
       </td>
     </tr>
   );

@@ -8,18 +8,18 @@ app.use(express.json());
 let todos = [
   {
     id: 1,
-    description: "eat",
-    completed: "false",
+    description: "drink",
+    completed: false,
   },
   {
     id: 2,
     description: "sleap",
-    completed: "true",
+    completed: true,
   },
   {
     id: 3,
     description: "work",
-    completed: "false",
+    completed: false,
   },
 ];
 

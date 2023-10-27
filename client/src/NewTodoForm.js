@@ -7,7 +7,7 @@ export default function NewTodoForm() {
 
   const submit = (e) => {
     e.preventDefault();
-    addTodo(todo);
+    addTodo({ description: todo, completed: false });
     setTodo("");
   };
 
